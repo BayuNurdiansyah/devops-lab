@@ -1,0 +1,5 @@
+A | mulai 01:47:19
+B | mulai 01:51:20
+C | mulai 01:56:13
+C | mulai 01:57:24
+C | mulai ulang 02:02:33

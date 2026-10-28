@@ -1,0 +1,26 @@
+groups:
+  - name: lab
+    rules:
+      - alert: HostCpuHigh
+        expr: 100 - (avg(rate(node_cpu_seconds_total{mode="idle"}[1m])) * 100) > 80
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: "CPU server di atas 80%"
+
+      - alert: ContainerRestarting
+        expr: count by (name) (last_over_time(container_start_time_seconds{name!=""}[5m])) - 1 > 2
+        labels:
+          severity: critical
+        annotations:
+          summary: "Container {{ $labels.name }} restart berulang"
+
+      - alert: ContainerMemoryNearLimit
+        expr: |
+          container_memory_working_set_bytes{name!=""}
+            / (container_spec_memory_limit_bytes{name!=""} > 0) > 0.9
+        labels:
+          severity: warning
+        annotations:
+          summary: "Memory {{ $labels.name }} hampir mentok batas"
