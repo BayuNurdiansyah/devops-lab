@@ -1,0 +1,12 @@
+- name: Push nginx config, the quick way
+  hosts: web
+  tasks:
+    - name: Copy baseline config
+      ansible.builtin.copy:
+        src: files/00-baseline.conf
+        dest: /etc/nginx/conf.d/00-baseline.conf
+      notify: Reload nginx
+
+  handlers:
+    - name: Reload nginx
+      ansible.builtin.command: nginx -s reload

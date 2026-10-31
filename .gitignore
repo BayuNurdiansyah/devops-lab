@@ -2,3 +2,5 @@
 **/data/
 *.log
 03-deploy/srv/
+04-ansible/lab_key
+04-ansible/logs/

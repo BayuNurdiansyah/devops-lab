@@ -1,0 +1,25 @@
+services:
+  srv-a:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    image: ansible-lab-server
+    container_name: srv-a
+    hostname: srv-a
+    ports: ["2201:22", "8101:80"]
+
+  srv-b:
+    image: ansible-lab-server
+    pull_policy: never
+    container_name: srv-b
+    hostname: srv-b
+    ports: ["2202:22", "8102:80"]
+    depends_on: [srv-a]
+
+  srv-c:
+    image: ansible-lab-server
+    pull_policy: never
+    container_name: srv-c
+    hostname: srv-c
+    ports: ["2203:22", "8103:80"]
+    depends_on: [srv-a]
