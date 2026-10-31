@@ -1,0 +1,31 @@
+services:
+  php-inplace:
+    build: ./docker
+    image: deploy-lab-php
+    container_name: deploy-php-inplace
+    volumes:
+      - ./srv:/srv:ro
+      - ./docker/opcache-inplace.ini:/usr/local/etc/php/conf.d/zz-lab.ini:ro
+
+  php-release:
+    image: deploy-lab-php
+    container_name: deploy-php-release
+    depends_on:
+      - php-inplace
+    volumes:
+      - ./srv:/srv:ro
+      - ./docker/opcache-release.ini:/usr/local/etc/php/conf.d/zz-lab.ini:ro
+
+  web:
+    image: nginx:alpine
+    container_name: deploy-web
+    ports:
+      - "8081:8081"
+      - "8082:8082"
+      - "8083:8083"
+    volumes:
+      - ./docker/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./srv:/srv:ro
+    depends_on:
+      - php-inplace
+      - php-release
