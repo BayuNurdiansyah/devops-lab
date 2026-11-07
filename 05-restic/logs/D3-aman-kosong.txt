@@ -1,0 +1,2 @@
+GAGAL: sumber cuma 0 file (minimal 100). Backup dibatalkan.
+exit code: 1

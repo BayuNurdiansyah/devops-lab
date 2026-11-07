@@ -1,0 +1,48 @@
+name: trivy-gate
+
+on:
+  push:
+    paths: ['06-trivy/**']
+  schedule:
+    - cron: '0 20 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cache Trivy DB
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/trivy
+          key: trivy-db-${{ github.run_id }}
+          restore-keys: trivy-db-
+
+      - name: Gate, app dependencies (blocking)
+        run: |
+          mkdir -p $HOME/.cache/trivy
+          docker run --rm \
+            -v $HOME/.cache/trivy:/root/.cache/ \
+            -v $PWD/06-trivy/app:/work -w /work \
+            aquasec/trivy:latest fs \
+            --scanners vuln,secret \
+            --severity HIGH,CRITICAL \
+            --ignore-unfixed \
+            --exit-code 1 .
+
+      - name: Report, base image (informational)
+        continue-on-error: true
+        run: |
+          docker build -f 06-trivy/app/Dockerfile.good -t app:ci 06-trivy/app
+          docker run --rm \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -v $HOME/.cache/trivy:/root/.cache/ \
+            aquasec/trivy:latest image \
+            --scanners vuln \
+            --severity HIGH,CRITICAL \
+            --ignore-unfixed app:ci

@@ -1,0 +1,18 @@
+ID        Time                 Host        Tags        Paths                                              Size
+---------------------------------------------------------------------------------------------------------------------
+ed632a73  2026-11-04 20:59:40  low                     /home/hafter/Dev/riset/devops-lab/05-restic/sites  29.625 MiB
+14da8833  2026-11-04 20:59:41  low                     /home/hafter/Dev/riset/devops-lab/05-restic/sites  29.278 MiB
+3d5d8141  2026-11-04 21:01:58  low         db-mentah   /db-mentah.tar                                     170.908 MiB
+4fdfc9fc  2026-11-04 21:02:00  low         db-dump     /shop.sql                                          2.358 MiB
+aa156af8  2026-11-04 21:11:37  low         cron        /home/hafter/Dev/riset/devops-lab/05-restic/sites  0 B
+3735df67  2026-11-04 21:11:37  low         cron        /home/hafter/Dev/riset/devops-lab/05-restic/sites  0 B
+70172dda  2026-11-04 21:11:38  low         cron        /home/hafter/Dev/riset/devops-lab/05-restic/sites  0 B
+---------------------------------------------------------------------------------------------------------------------
+Timestamps shown in local time
+7 snapshots
+scanning...
+[0:00] 100.00%  1 / 1 snapshots, 1 files, 0 B
+Stats in restore-size mode:
+     Snapshots processed:  1
+        Total File Count:  1
+              Total Size:  0 B  

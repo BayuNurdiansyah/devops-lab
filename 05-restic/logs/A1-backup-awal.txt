@@ -1,0 +1,13 @@
+no parent snapshot found, will read all files
+
+Files:         306 new,     0 changed,     0 unmodified
+Dirs:            4 new,     0 changed,     0 unmodified
+Added to the repository: 29.735 MiB (29.666 MiB stored)
+
+processed 306 files, 29.625 MiB in 0:01
+snapshot ed632a73 saved
+
+real	1.18s
+user	0.66s
+sys	0.12s
+cpu	66%

@@ -1,0 +1,10 @@
+2026-11-04 14:09:02 0 [Note] InnoDB: Starting crash recovery from checkpoint LSN=45552
+2026-11-04 14:09:02 0 [Note] InnoDB: To recover: 315 pages
+2026-11-04 14:09:02 0 [Note] Recovering after a crash using tc.log
+2026-11-04 14:09:02 0 [Note] Starting table crash recovery...
+2026-11-04 14:09:02 0 [Note] Crash table recovery finished.
+2026-11-04 14:09:04 0 [Note] mariadbd: ready for connections.
+Table	Op	Msg_type	Msg_text
+shop.orders	check	status	OK
+baris_restore
+8100

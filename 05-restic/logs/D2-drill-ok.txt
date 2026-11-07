@@ -1,0 +1,6 @@
+DRILL OK: restore + verifikasi dalam 1 detik
+
+real	0.99s
+user	0.65s
+sys	0.08s
+cpu	73%

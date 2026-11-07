@@ -1,0 +1,4 @@
+Table	Op	Msg_type	Msg_text
+shop.orders	check	status	OK
+baris_restore
+8550

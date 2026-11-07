@@ -1,0 +1,6 @@
+FROM php:8.3-fpm-alpine
+WORKDIR /app
+COPY --chown=www-data:www-data index.php .
+USER www-data
+HEALTHCHECK --interval=30s CMD php-fpm -t || exit 1
+CMD ["php-fpm"]

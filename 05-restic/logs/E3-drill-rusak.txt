@@ -1,0 +1,10 @@
+ignoring error for /sites/a/file12.bin: decrypting blob <data/f035a3e0> from pack 6ef352e067308debd9d0be3bb8fc8512e5c535fa18ef3e2da470a4844800109d failed: ciphertext verification failed
+ignoring error for /sites/a/file21.bin: decrypting blob <data/b8beadea> from pack 6ef352e067308debd9d0be3bb8fc8512e5c535fa18ef3e2da470a4844800109d failed: ciphertext verification failed
+ignoring error for /sites/a/file10.bin: decrypting blob <data/44b06ea8> from pack 3687091c8cbbfec1d73ec8882be6d054e63133e2dce7bdacd0c2ba13eb945ebf failed: ciphertext verification failed
+ignoring error for /sites/a/file17.bin: decrypting blob <data/dabff23f> from pack 3687091c8cbbfec1d73ec8882be6d054e63133e2dce7bdacd0c2ba13eb945ebf failed: ciphertext verification failed
+ignoring error for /sites/a/file10.bin: lchown /tmp/tmp.ytn4C6fxHZ/sites/a/file10.bin: no such file or directory
+ignoring error for /sites/a/file12.bin: lchown /tmp/tmp.ytn4C6fxHZ/sites/a/file12.bin: no such file or directory
+ignoring error for /sites/a/file17.bin: lchown /tmp/tmp.ytn4C6fxHZ/sites/a/file17.bin: no such file or directory
+ignoring error for /sites/a/file21.bin: lchown /tmp/tmp.ytn4C6fxHZ/sites/a/file21.bin: no such file or directory
+Fatal: There were 8 errors
+DRILL GAGAL: restore error

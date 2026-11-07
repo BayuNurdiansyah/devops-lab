@@ -4,3 +4,6 @@
 03-deploy/srv/
 04-ansible/lab_key
 04-ansible/logs/
+06-trivy/app/.env
+06-trivy/logs/
+06-trivy/*.json

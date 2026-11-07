@@ -1,0 +1,8 @@
+restoring snapshot 14da8833 of [/home/hafter/Dev/riset/devops-lab/05-restic/sites] at 2026-11-04 20:59:41.754706242 +0700 WIB by hafter@low to restore/A
+Summary: Restored 310 files/dirs (29.278 MiB) in 0:00
+
+real	1.10s
+user	0.56s
+sys	0.06s
+cpu	56%
+IDENTIK

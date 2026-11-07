@@ -1,0 +1,19 @@
+using temporary cache in /tmp/restic-check-cache-3114771754
+create exclusive lock for repository
+load indexes
+check all packs
+check snapshots, trees and blobs
+[0:00] 100.00%  8 / 8 snapshots
+read all data
+pack 6bdac4b887bbe11ad51c74a1b641365c609d6607ae25f90d99950f214a19da46 contains 3 errors: [blob 2b0ed84edc95a62f3b021700fc3ed5adc1c43506792cf766ce22775006937916: decrypting blob <data/2b0ed84e> from pack 6bdac4b887bbe11ad51c74a1b641365c609d6607ae25f90d99950f214a19da46 failed: ciphertext verification failed blob 3d0e4f125adb05695dfc5fa94e785b23bd1cf6cfa916506461bee0919bfc8c3d: decrypting blob <data/3d0e4f12> from pack 6bdac4b887bbe11ad51c74a1b641365c609d6607ae25f90d99950f214a19da46 failed: ciphertext verification failed unexpected pack id 768d8341ec3889e7bbb08848b1abcc432b822df161f207c4f2684859ee3309af]
+pack 3687091c8cbbfec1d73ec8882be6d054e63133e2dce7bdacd0c2ba13eb945ebf contains 3 errors: [blob 44b06ea8383b6c9a2b3c749170f0c9a57c64a730c2f2328c7d62b37f47d5c7da: decrypting blob <data/44b06ea8> from pack 3687091c8cbbfec1d73ec8882be6d054e63133e2dce7bdacd0c2ba13eb945ebf failed: ciphertext verification failed blob dabff23f9f65f4e2fc1bfa719c3d48077258dddccad56c7c2f7cb959b80c49cb: decrypting blob <data/dabff23f> from pack 3687091c8cbbfec1d73ec8882be6d054e63133e2dce7bdacd0c2ba13eb945ebf failed: ciphertext verification failed unexpected pack id ea414504afc5057fc17d95019d09237deed498538ed68712b0a798aa9eb5fc43]
+pack 6ef352e067308debd9d0be3bb8fc8512e5c535fa18ef3e2da470a4844800109d contains 3 errors: [blob f035a3e0802df95f5b0de7aaf83f3b5884cba75487ec5781f09c33c5329f7c74: decrypting blob <data/f035a3e0> from pack 6ef352e067308debd9d0be3bb8fc8512e5c535fa18ef3e2da470a4844800109d failed: ciphertext verification failed blob b8beadea3a0ef4d2183cca311a01a9f7505e1e7a27fe7b5ecc0cb41f1373ca8e: decrypting blob <data/b8beadea> from pack 6ef352e067308debd9d0be3bb8fc8512e5c535fa18ef3e2da470a4844800109d failed: ciphertext verification failed unexpected pack id 7273fe89dfb7f4081825afd5ca21401e168ef08c4bd176ec53364d60a0112801]
+[0:00] 100.00%  12 / 12 packs
+
+The repository contains damaged pack files. These damaged files must be removed to repair the repository. This can be done using the following commands. Please read the troubleshooting guide at https://restic.readthedocs.io/en/stable/077_troubleshooting.html first.
+
+restic repair packs 3687091c8cbbfec1d73ec8882be6d054e63133e2dce7bdacd0c2ba13eb945ebf 6ef352e067308debd9d0be3bb8fc8512e5c535fa18ef3e2da470a4844800109d 6bdac4b887bbe11ad51c74a1b641365c609d6607ae25f90d99950f214a19da46
+restic repair snapshots --forget
+
+Damaged pack files can be caused by backend problems, hardware problems or bugs in restic. Please open an issue at https://github.com/restic/restic/issues/new/choose for further troubleshooting!
+Fatal: repository contains errors

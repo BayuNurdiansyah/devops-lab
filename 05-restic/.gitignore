@@ -1,0 +1,9 @@
+repo/
+repo.bak/
+restore/
+sites/
+sites-pindah/
+.restic-pass
+.restic-pass.hilang
+*.tar
+*.sql
