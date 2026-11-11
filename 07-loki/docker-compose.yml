@@ -1,0 +1,64 @@
+name: lab07
+
+x-alloy: &alloy
+  image: grafana/alloy:v1.21.2
+  command: run --server.http.listen-addr=0.0.0.0:12345 --storage.path=/var/lib/alloy/data /etc/alloy/config.alloy
+  depends_on: [loki]
+  restart: unless-stopped
+
+services:
+  loki:
+    image: grafana/loki:3.7.0
+    command: -config.file=/etc/loki/loki-config.yaml
+    ports: ["127.0.0.1:3100:3100"]
+    volumes:
+      - ./loki-config.yaml:/etc/loki/loki-config.yaml:ro
+      - loki-data:/loki
+
+  grafana:
+    image: grafana/grafana:12.2.0
+    ports: ["127.0.0.1:3000:3000"]
+    environment:
+      # LAB ONLY: no login, bound to localhost.
+      GF_AUTH_ANONYMOUS_ENABLED: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
+    volumes:
+      - ./grafana-datasource.yaml:/etc/grafana/provisioning/datasources/loki.yaml:ro
+    depends_on: [loki]
+
+  alloy-a:
+    <<: *alloy
+    ports: ["127.0.0.1:12345:12345"]
+    environment: { HOST: srv-a, LOKI_URL: "http://loki:3100/loki/api/v1/push" }
+    volumes: ["./alloy/config.alloy:/etc/alloy/config.alloy:ro", "./logs/srv-a:/var/log/lab:ro"]
+
+  alloy-b:
+    <<: *alloy
+    ports: ["127.0.0.1:12346:12345"]
+    environment: { HOST: srv-b, LOKI_URL: "http://loki:3100/loki/api/v1/push" }
+    volumes: ["./alloy/config.alloy:/etc/alloy/config.alloy:ro", "./logs/srv-b:/var/log/lab:ro"]
+
+  alloy-c:
+    <<: *alloy
+    ports: ["127.0.0.1:12347:12345"]
+    environment: { HOST: srv-c, LOKI_URL: "http://loki:3100/loki/api/v1/push" }
+    volumes: ["./alloy/config.alloy:/etc/alloy/config.alloy:ro", "./logs/srv-c:/var/log/lab:ro"]
+
+  # Scenario D, part 2: a NEW server joins (correct config, its own logs)
+  alloy-d:
+    <<: *alloy
+    profiles: ["late"]
+    ports: ["127.0.0.1:12348:12345"]
+    environment: { HOST: srv-d, LOKI_URL: "http://loki:3100/loki/api/v1/push" }
+    volumes: ["./alloy/config.alloy:/etc/alloy/config.alloy:ro", "./logs/srv-d:/var/log/lab:ro"]
+
+  # Scenario D, part 1: the "every field is a label" config
+  alloy-bad:
+    <<: *alloy
+    profiles: ["bad"]
+    ports: ["127.0.0.1:12349:12345"]
+    environment: { HOST: srv-bad, LOKI_URL: "http://loki:3100/loki/api/v1/push" }
+    volumes: ["./alloy/bad.alloy:/etc/alloy/config.alloy:ro", "./logs/srv-a:/var/log/lab:ro"]
+
+volumes:
+  loki-data:

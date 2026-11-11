@@ -7,3 +7,5 @@
 06-trivy/app/.env
 06-trivy/logs/
 06-trivy/*.json
+07-loki/logs/
+07-loki/results/

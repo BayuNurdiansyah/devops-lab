@@ -1,0 +1,33 @@
+// The "helpful" config: turn every field of the access log into a label.
+local.file_match "logs" {
+  path_targets = [
+    {"__path__" = "/var/log/lab/access.log", "job" = "nginx", "host" = sys.env("HOST")},
+  ]
+  sync_period = "5s"
+}
+
+loki.source.file "tail" {
+  targets       = local.file_match.logs.targets
+  forward_to    = [loki.process.labels.receiver]
+  tail_from_end = false
+}
+
+loki.process "labels" {
+  stage.regex {
+    expression = `^(?P<ip>\S+) \S+ \S+ \[[^\]]+\] "(?P<method>\S+) (?P<path>\S+) [^"]*" (?P<status>\d{3}) `
+  }
+  stage.labels {
+    values = {
+      ip     = "",
+      path   = "",
+      status = "",
+    }
+  }
+  forward_to = [loki.write.central.receiver]
+}
+
+loki.write "central" {
+  endpoint {
+    url = sys.env("LOKI_URL")
+  }
+}

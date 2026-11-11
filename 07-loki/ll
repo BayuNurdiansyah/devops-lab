@@ -1,0 +1,5 @@
+#!/bin/bash
+# ll '<LogQL log query>' [limit]  -> newest matching lines, prefixed with the host label
+curl -sG "${LOKI:-http://localhost:3100}/loki/api/v1/query_range" \
+  --data-urlencode "query=$1" --data-urlencode "limit=${2:-5}" --data-urlencode "since=1h" \
+ | jq -r '.data.result[] | .stream.host as $h | .values[] | "\($h)  \(.[1])"'

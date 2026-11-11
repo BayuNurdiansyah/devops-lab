@@ -1,0 +1,4 @@
+#!/bin/bash
+# lq '<LogQL metric query>'  -> one line per series: labels, then the value
+curl -sG "${LOKI:-http://localhost:3100}/loki/api/v1/query" --data-urlencode "query=$1" \
+ | jq -r '.data.result[] | ((.metric | to_entries | map(.value) | join("  ")) + "  " + .value[1])' | sort

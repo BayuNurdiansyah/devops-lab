@@ -1,0 +1,20 @@
+// One agent per server. HOST and LOKI_URL come from the environment.
+local.file_match "logs" {
+  path_targets = [
+    {"__path__" = "/var/log/lab/access.log", "job" = "nginx", "host" = sys.env("HOST")},
+    {"__path__" = "/var/log/lab/app.log",    "job" = "app",   "host" = sys.env("HOST")},
+  ]
+  sync_period = "5s"
+}
+
+loki.source.file "tail" {
+  targets       = local.file_match.logs.targets
+  forward_to    = [loki.write.central.receiver]
+  tail_from_end = false
+}
+
+loki.write "central" {
+  endpoint {
+    url = sys.env("LOKI_URL")
+  }
+}
