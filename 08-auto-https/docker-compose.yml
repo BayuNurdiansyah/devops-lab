@@ -1,0 +1,23 @@
+services:
+  caddy:
+    image: caddy:2
+    container_name: https-caddy
+    ports:
+      - "8080:80"
+      - "8443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+
+  nginx:
+    image: nginx:alpine
+    container_name: https-nginx
+    ports:
+      - "8444:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx-certs:/certs:ro
+    profiles: ["nginx"]
+
+volumes:
+  caddy_data:

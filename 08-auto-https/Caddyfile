@@ -1,0 +1,13 @@
+{
+	local_certs
+	renew_interval 30s
+}
+
+app.local {
+	tls {
+		issuer internal {
+			lifetime 5m
+		}
+	}
+	respond "caddy ok"
+}

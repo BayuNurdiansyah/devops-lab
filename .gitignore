@@ -9,3 +9,6 @@
 06-trivy/*.json
 07-loki/logs/
 07-loki/results/
+08-auto-https/nginx-certs/
+08-auto-https/root.crt
+08-auto-https/logs/
