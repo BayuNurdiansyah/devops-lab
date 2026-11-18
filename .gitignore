@@ -12,3 +12,6 @@
 08-auto-https/nginx-certs/
 08-auto-https/root.crt
 08-auto-https/logs/
+09-sops/keys/
+09-sops/work/
+09-sops/results/
