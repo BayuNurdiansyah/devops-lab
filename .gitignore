@@ -15,3 +15,5 @@
 09-sops/keys/
 09-sops/work/
 09-sops/results/
+10-precommit/work/
+10-precommit/results/
